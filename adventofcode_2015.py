@@ -159,16 +159,16 @@ def adventofcode_2015_six_part1(file):
             if(line[0] == 'turn' and line[1]=='on'):
                 start = line[2].split(',')
                 end = line[3].split(',')
-                print(start)
-                print(end)
+                #print(start)
+                #print(end)
                 for i in range(int(start[0]),int(end[0])+1):
                     for j in range(int(start[1]),int(end[1])+1):
                         lights[i][j] = 1
             elif(line[0] == 'turn' and line[1]=='off'):
                 start = line[2].split(',')
                 end = line[3].split(',')
-                print(start)
-                print(end)
+                #print(start)
+                #print(end)
                 for i in range(int(start[0]),int(end[0])+1):
                     for j in range(int(start[1]),int(end[1])+1):
                         lights[i][j] = 0
@@ -190,6 +190,43 @@ def adventofcode_2015_six_part1(file):
             if(j==1):
                 on_counter +=1
     return on_counter
+
+def adventofcode_2015_six_part2(file):
+    lights = [[0 for i in range(1000)] for j in range(1000)]
+    with open(file) as f:
+        for line in f:
+            line = line.replace('through ',"").strip('\n').split(' ')
+            #print(line)
+            if(line[0] == 'turn' and line[1]=='on'):
+                start = line[2].split(',')
+                end = line[3].split(',')
+                #print(start)
+                #print(end)
+                for i in range(int(start[0]),int(end[0])+1):
+                    for j in range(int(start[1]),int(end[1])+1):
+                        lights[i][j] +=1
+            elif(line[0] == 'turn' and line[1]=='off'):
+                start = line[2].split(',')
+                end = line[3].split(',')
+                #print(start)
+                #print(end)
+                for i in range(int(start[0]),int(end[0])+1):
+                    for j in range(int(start[1]),int(end[1])+1):
+                        if(lights[i][j]>0):
+                            lights[i][j] -=1
+            elif(line[0] == 'toggle'):
+                start = line[1].split(',')
+                end = line[2].split(',')
+                #print(start)
+                #print(end)
+                for i in range(int(start[0]),int(end[0])+1):
+                    for j in range(int(start[1]),int(end[1])+1):
+                        lights[i][j] +=2
+    total_bright = 0
+    for i in lights:
+        for j in i:
+            total_bright += j
+    return total_bright 
 
 #2015
 #---------------------------------------------
@@ -214,4 +251,7 @@ def adventofcode_2015_six_part1(file):
 #print(adventofcode_2015_five_part2('text_inputs/adventofcode_2015_5.txt'))
 
 #Day 6 
-print(adventofcode_2015_six_part1('text_inputs/adventofcode_2015_6.txt'))
+#print(adventofcode_2015_six_part1('text_inputs/adventofcode_2015_6.txt'))
+#print(adventofcode_2015_six_part2('text_inputs/adventofcode_2015_6.txt'))
+
+#Day 7 
