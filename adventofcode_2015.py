@@ -151,7 +151,7 @@ def adventofcode_2015_five_part2(file):
     return nice
 
 def adventofcode_2015_six_part1(file):
-    #lights = [[0]*10] * 10 #shallow copy: causes column for value to change rather than 1 element
+    #lights = [[0]*10] * 10 #shallow list: causes column for value to change rather than 1 element
     lights = [[0 for i in range(1000)] for j in range(1000)]
     with open(file) as f:
         for line in f:
