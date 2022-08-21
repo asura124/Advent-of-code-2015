@@ -330,6 +330,21 @@ def adventofcode_2015_nine_part1_and_part2(file):
         total_distances.append(curr_dis)
     return min(total_distances) #return max(total_distances) for part 2
 
+def adventofcode_2015_ten_part1_and_part2(code):
+    for i in range(40): #change to 50 for part 2 
+        count = 1
+        temp = ""
+        for j in range(len(code)-1):
+            if(code[j]==code[j+1]):
+                count+=1
+            else:
+                temp = temp + str(count) + code[j]
+                count = 1
+        #print(count)
+        temp = temp + str(count) + code[-1]
+        code = temp
+        #print(temp) 
+    return len(code)
 #2015
 #---------------------------------------------
 
@@ -367,3 +382,5 @@ def adventofcode_2015_nine_part1_and_part2(file):
 #print(adventofcode_2015_nine_part1_and_part2('text_inputs/adventofcode_2015_9.txt'))
 
 #Day 10 
+#print(adventofcode_2015_ten('1'))
+print(adventofcode_2015_ten_part1_and_part2('1321131112'))
