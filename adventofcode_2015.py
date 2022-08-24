@@ -386,6 +386,49 @@ def password_increment(ascii_password):
         last -= 1
         ascii_password[last] +=1
     return ascii_password
+
+def adventofcode_2015_twelve_part1(file):
+    total = 0
+    curr = ""
+    with open(file) as f:
+        for line in f:
+            for l in line:
+                if(l=="-" or l.isnumeric()):
+                    curr += l
+                elif(curr!=""):
+                    total += int(curr)
+                    curr = ""
+    print(total)
+    return 0 
+
+def adventofcode_2015_twelve_part2(file):
+    object_open_backet = 0
+    total = 0
+    curr_num = 0 
+    ignore = False
+    with open(file) as f:
+        for line in f:
+            line = line.replace('"','').replace('[','[,').replace(']',',]').replace(':',',').replace('{','{,').replace('}',',}').strip('\n')
+            line = line.split(',')
+            for l in line:
+                print(l)
+                if(l=='{'):
+                    object_open_backet += 1
+                elif(object_open_backet>0 and l=='red'):
+                    ignore = True
+                elif(l.isnumeric() and object_open_backet>0):
+                    curr_num += int(l)
+                elif(l.isnumeric() and object_open_backet==0):
+                    total += int(l)
+                elif(l=='}'):
+                    if(ignore):
+                        total += 0
+                    else:
+                        total += curr_num
+                    curr_num = 0
+                    object_open_backet -=1
+                    ignore = False
+    return total
 #2015
 #---------------------------------------------
 
@@ -427,5 +470,9 @@ def password_increment(ascii_password):
 #print(adventofcode_2015_ten_part1_and_part2('1321131112'))
 
 #Day 11
-print(adventofcode_2015_eleven('hepxcrrq'))
-print(adventofcode_2015_eleven('hepxxyzz'))
+#print(adventofcode_2015_eleven('hepxcrrq'))
+#print(adventofcode_2015_eleven('hepxxyzz'))
+
+#Day 12 
+#print(adventofcode_2015_twelve_part1('text_inputs/adventofcode_2015_12.txt'))
+print(adventofcode_2015_twelve_part2('text_inputs/adventofcode_2015_12.txt'))
